@@ -133,3 +133,6 @@ dmypy.json
 
 # Configuration
 config.json
+
+# Google Firebase
+serviceAccountKey.json

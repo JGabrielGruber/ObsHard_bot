@@ -6,5 +6,9 @@
 			"KEY": "",
 			"SECRET": ""
 		}
+	},
+	"FIREBASE_API": {
+		"SERVICEACOUNTKEY_PATH": "",
+		"DATABASE_URL": ""
 	}
 }
