@@ -1,5 +1,5 @@
-from obsgpu_bot.models.loja import Loja
-from obsgpu_bot.models.variacao import Variacao
+from models.loja import Loja
+from models.variacao import Variacao
 
 
 class Produto:

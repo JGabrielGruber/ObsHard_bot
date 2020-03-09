@@ -1,4 +1,4 @@
-from obsgpu_bot.models.modelo import Modelo
+from models.modelo import Modelo
 
 
 class Variacao():

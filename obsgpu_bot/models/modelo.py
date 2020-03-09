@@ -1,5 +1,5 @@
-from obsgpu_bot.models.marca import Marca
-from obsgpu_bot.models.arquitetura import Arquitetura
+from models.marca import Marca
+from models.arquitetura import Arquitetura
 
 
 class Modelo():
