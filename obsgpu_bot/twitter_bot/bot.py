@@ -1,7 +1,7 @@
 import tweepy
 
-from obsgpu_bot.main import api
+from main import tw_api
 
 
 def setStatus():
-	api.update_status("Hello Tweepy(World)")
+	tw_api.update_status("Hello Tweepy(World)")

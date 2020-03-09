@@ -4,7 +4,7 @@ import firebase_admin
 
 from firebase_admin import db, credentials
 
-__CONFPATH__ = "../config.json"
+__CONFPATH__ = "config.json"
 tw_api: tweepy.API = None
 fb_app: firebase_admin.App = None
 
@@ -13,7 +13,8 @@ def loadConfigs():
 	try:
 		with open(__CONFPATH__) as f:
 			return json.load(f)
-	except:
+	except Exception as e:
+		print(e)
 		return None
 
 
@@ -46,4 +47,9 @@ def defineConfigs():
 		    "Please, create the config.json file as the config.json.example!")
 
 
-defineConfigs()
+def main():
+	defineConfigs()
+
+	from repositories import repo
+	from twitter_bot import bot
+	from price_request import req

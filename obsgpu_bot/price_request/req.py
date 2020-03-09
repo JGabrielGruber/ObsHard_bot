@@ -2,8 +2,8 @@ import requests
 import locale
 
 from bs4 import BeautifulSoup
-from obsgpu_bot.models.loja import Loja
-from obsgpu_bot.models.produto import Produto
+from models.loja import Loja
+from models.produto import Produto
 
 
 def getPreco(produto: Produto) -> float:
