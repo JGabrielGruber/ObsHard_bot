@@ -13,8 +13,7 @@ def loadConfigs():
 	try:
 		with open(__CONFPATH__) as f:
 			return json.load(f)
-	except Exception as e:
-		print(e)
+	except Exception:
 		return None
 
 
