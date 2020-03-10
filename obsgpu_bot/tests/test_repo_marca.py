@@ -7,7 +7,7 @@ from firebase_admin.db import Reference
 
 def test_get():
 	main.defineConfigs()
-	assert type(marca.get()) is tuple
+	assert type(marca.get()) is list
 
 def test_add():
 	main.defineConfigs()
