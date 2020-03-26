@@ -10,10 +10,19 @@ def get():
 	query = db.reference('/marcas').get(etag=True)
 	marcas = []
 	for item in query[0]:
-		marcas.append(Marca(item, query[0][item]['nome']))
+		marcas.append(Marca(query[0][item]['nome'], item))
 	return marcas
 
 
 def add(marca: Marca):
-	return db.reference('/marcas').push(
-	    FirebaseJSON().encode(marca)).get(etag=True)
+	k = db.reference('/marcas').push(
+	    FirebaseJSON().encode(marca)).key
+	return (db.reference('/marcas/' + k).get(), k)
+
+def upd(marca: Marca):
+	db.reference('/marcas/' + marca._id).set(
+	    FirebaseJSON().encode(marca))
+	return (db.reference('/marcas/' + marca._id).get(), marca._id)
+
+def rmv(marca: Marca):
+	return db.reference('/marcas/' + marca._id).delete()
