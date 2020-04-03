@@ -3,3 +3,7 @@ class Arquitetura():
 		self._id = _id
 		self.nome = nome
 		self.ano = ano
+
+	@classmethod
+	def fromJSON(cls, json, id):
+		return cls(json['nome'], json['ano'], id if id else None)
