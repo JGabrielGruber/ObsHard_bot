@@ -7,11 +7,11 @@ marcas: list = None
 
 
 def get():
-	query = db.reference('/marcas').get(etag=True)
+	query = db.reference('/marcas').get()
 	marcas = []
-	if query[0] is list:
-		for item in query[0]:
-			marcas.append(Marca(query[0][item]['nome'], item))
+	if type(query) is dict:
+		for item in query:
+			marcas.append(Marca.fromJSON(query[item], item))
 	return marcas
 
 
