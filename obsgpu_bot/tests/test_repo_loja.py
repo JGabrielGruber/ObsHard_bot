@@ -22,6 +22,15 @@ def test_add():
 	id = t._id
 	assert type(t) is Loja
 
+def test_getById():
+	if main.fb_app is None:
+		main.defineConfigs()
+	if id is None:
+		test_add()
+	t = loja.getById(id)
+	test_rmv()
+	assert type(t) is Loja
+
 
 def test_upd():
 	if main.fb_app is None:

@@ -14,6 +14,12 @@ def get():
 			lojas.append(Loja.fromJSON(query[item], item))
 	return lojas
 
+def getById(id):
+	query = db.reference('/lojas/' + id).get()
+	if type(query) is dict:
+		return Loja.fromJSON(query, id)
+	return None
+
 
 def add(loja: Loja):
 	k = db.reference('/lojas').push(FirebaseJSON().encode(loja)).key
