@@ -15,14 +15,22 @@ def get():
 	return marcas
 
 
+def getById(id):
+	query = db.reference('/marcas/' + id).get()
+	if type(query) is dict:
+			return Marca.fromJSON(query, id)
+	return None
+
+
 def add(marca: Marca):
 	k = db.reference('/marcas').push(FirebaseJSON().encode(marca)).key
-	return (db.reference('/marcas/' + k).get(), k)
+	return Marca.fromJSON(db.reference('/marcas/' + k).get(), k)
 
 
 def upd(marca: Marca):
-	db.reference('/marcas/' + marca._id).set(FirebaseJSON().encode(marca))
-	return (db.reference('/marcas/' + marca._id).get(), marca._id)
+	id = marca._id
+	db.reference('/marcas/' + id).set(FirebaseJSON().encode(marca))
+	return Marca.fromJSON(db.reference('/marcas/' + id).get(), id)
 
 
 def rmv(marca: Marca):
