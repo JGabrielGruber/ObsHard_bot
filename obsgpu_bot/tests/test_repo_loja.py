@@ -19,8 +19,8 @@ def test_add():
 	if main.fb_app is None:
 		main.defineConfigs()
 	t = loja.add(Loja("test", "tag", "prop", "atrib"))
-	id = t[1]
-	assert type(t) is tuple
+	id = t._id
+	assert type(t) is Loja
 
 
 def test_upd():
@@ -29,7 +29,8 @@ def test_upd():
 	if id is None:
 		test_add()
 	t = loja.upd(Loja("test atualizado", "taga", "prop", "atrib", id))
-	assert type(t) is tuple
+	test_rmv()
+	assert type(t) is Loja
 
 
 def test_rmv():
