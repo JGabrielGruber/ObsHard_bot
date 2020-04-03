@@ -10,3 +10,8 @@ class Loja:
 		self.tag = tag
 		self.propriedade = propriedade
 		self.atributo = atributo
+
+	@classmethod
+	def fromJSON(cls, json, id):
+		return cls(json['nome'], json['tag'], json['propriedade'],
+		           json['atributo'], id if id else None)
