@@ -15,8 +15,16 @@ def get():
 	return arquiteturas
 
 
+def getById(id):
+	query = db.reference('/arquiteturas/' + id).get()
+	if type(query) is dict:
+		return Arquitetura.fromJSON(query, id)
+	return None
+
+
 def add(arquitetura: Arquitetura):
-	k = db.reference('/arquiteturas').push(FirebaseJSON().encode(arquitetura)).key
+	k = db.reference('/arquiteturas').push(
+	    FirebaseJSON().encode(arquitetura)).key
 	return Arquitetura.fromJSON(db.reference('/arquiteturas/' + k).get(), k)
 
 
