@@ -22,8 +22,8 @@ def test_add():
 			2020
 		)
 	)
-	id = t[1]
-	assert type(t) is tuple
+	id = t._id
+	assert type(t) is Arquitetura
 
 def test_upd():
 	if main.fb_app is None:
@@ -37,7 +37,8 @@ def test_upd():
 			id
 		)
 	)
-	assert type(t) is tuple
+	test_rmv()
+	assert type(t) is Arquitetura
 
 def test_rmv():
 	if main.fb_app is None:

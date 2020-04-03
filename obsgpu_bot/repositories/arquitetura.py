@@ -7,22 +7,23 @@ arquiteturas: list = None
 
 
 def get():
-	query = db.reference('/arquiteturas').get(etag=True)
+	query = db.reference('/arquiteturas').get()
 	arquiteturas = []
-	if query[0] is list:
-		for item in query[0]:
-			arquiteturas.append(Arquitetura(query[0][item]['nome'], item))
+	if type(query) is dict:
+		for item in query:
+			arquiteturas.append(Arquitetura.fromJSON(query[item], item))
 	return arquiteturas
 
 
 def add(arquitetura: Arquitetura):
 	k = db.reference('/arquiteturas').push(FirebaseJSON().encode(arquitetura)).key
-	return (db.reference('/arquiteturas/' + k).get(), k)
+	return Arquitetura.fromJSON(db.reference('/arquiteturas/' + k).get(), k)
 
 
 def upd(arquitetura: Arquitetura):
-	db.reference('/arquiteturas/' + arquitetura._id).set(FirebaseJSON().encode(arquitetura))
-	return (db.reference('/arquiteturas/' + arquitetura._id).get(), arquitetura._id)
+	id = arquitetura._id
+	db.reference('/arquiteturas/' + id).set(FirebaseJSON().encode(arquitetura))
+	return Arquitetura.fromJSON(db.reference('/arquiteturas/' + id).get(), id)
 
 
 def rmv(arquitetura: Arquitetura):
