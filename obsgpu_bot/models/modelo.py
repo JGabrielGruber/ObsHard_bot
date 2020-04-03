@@ -14,3 +14,7 @@ class Modelo():
 		self.arquitetura = arquitetura
 		self.ano = ano
 		self.nome = nome
+
+	@classmethod
+	def fromJSON(cls, json, id):
+		return cls(None, None, json['ano'], json['nome'], id if id else None)
