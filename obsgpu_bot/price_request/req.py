@@ -7,7 +7,7 @@ from models.produto import Produto
 
 
 def getPreco(produto: Produto) -> float:
-	locale.setlocale(locale.LC_NUMERIC, "nl")
+	locale.setlocale(locale.LC_NUMERIC, "pt_BR.UTF-8")
 	try:
 		html = requests.get(produto.link)
 		soup = BeautifulSoup(html.text, "html.parser")
