@@ -15,7 +15,7 @@ from firebase_admin.db import Reference
 id: str = None
 
 
-def test_get():
+def test_getPreco():
 	if main.fb_app is None:
 		main.defineConfigs()
 	l = Loja("Kabum", "meta", "itemprop", "price")
@@ -23,3 +23,10 @@ def test_get():
 	preco = req.getPreco(p)
 	print(preco)
 	assert type(preco) is float
+
+def test_getProdutosPrecos():
+	if main.fb_app is None:
+		main.defineConfigs()
+	precos = req.getProdutos()
+	print(precos)
+	assert type(precos) is list
