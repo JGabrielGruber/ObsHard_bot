@@ -12,3 +12,7 @@ class Produto:
 		self.loja = loja
 		self.variacao = variacao
 		self.link = link
+
+	@classmethod
+	def fromJSON(cls, json, id):
+		return cls(None, None, json['link'], id if id else None)
