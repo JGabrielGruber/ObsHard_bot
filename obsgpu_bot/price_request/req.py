@@ -10,20 +10,21 @@ from repositories import produto
 def getPreco(produto: Produto) -> float:
 	locale.setlocale(locale.LC_NUMERIC, "pt_BR.UTF-8")
 	price = {}
+	val = 0.0
 	try:
 		html = requests.get(produto.link)
 		soup = BeautifulSoup(html.text, "html.parser")
 		price = soup.find(
 		    produto.loja.tag,
 		    attrs={produto.loja.propriedade: produto.loja.atributo})
-		return float(price["content"])
+		val = float(price["content"])
 	except ValueError:
 		try:
-			return locale.atof(price["content"])
+			val = locale.atof(price["content"])
 		except KeyError:
-			return locale.atof(price.contents[0].string.split(" ", 1)[1])
+			val = locale.atof(price.contents[0].string.split(" ", 1)[1])
 	finally:
-		return 0.0
+		return val
 
 
 def getProdutos():
