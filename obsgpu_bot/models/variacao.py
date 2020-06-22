@@ -6,3 +6,7 @@ class Variacao():
 		self._id = _id
 		self.modelo = modelo
 		self.nome = nome
+
+	@classmethod
+	def fromJSON(cls, json, id=None):
+		return cls(None, json['nome'], id if id else None)
