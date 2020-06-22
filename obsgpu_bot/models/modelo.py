@@ -16,5 +16,5 @@ class Modelo():
 		self.nome = nome
 
 	@classmethod
-	def fromJSON(cls, json, id):
+	def fromJSON(cls, json, id=None):
 		return cls(None, None, json['ano'], json['nome'], id if id else None)

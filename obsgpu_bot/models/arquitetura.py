@@ -5,5 +5,5 @@ class Arquitetura():
 		self.ano = ano
 
 	@classmethod
-	def fromJSON(cls, json, id):
+	def fromJSON(cls, json, id=None):
 		return cls(json['nome'], json['ano'], id if id else None)
