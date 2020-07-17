@@ -10,9 +10,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![AGPLv3 License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -135,7 +132,7 @@ Distributed under the AGPLv3 License. See the [License](LICENSE) for more inform
 
 José Gabriel Gruber - [@JGabrielGruber](https://twitter.com/JGabrielGruber) - jgabrielgruber@hotmail.com
 
-Project Link: [https://github.com/JGabrielGruber/ObsHard_bot](https://github.com/JGabrielGruber/ObsHard_bot)
+Project Link: [https://github.com/JGabrielGruber/ObsHard_plat](https://github.com/JGabrielGruber/ObsHard_plat)
 
 
 
@@ -163,15 +160,15 @@ Project Link: [https://github.com/JGabrielGruber/ObsHard_bot](https://github.com
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/JGabrielGruber/ObsHard_bot/graphs/contributors
+[contributors-url]: https://github.com/JGabrielGruber/ObsHard_plat/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/JGabrielGruber/ObsHard_bot/network/members
+[forks-url]: https://github.com/JGabrielGruber/ObsHard_plat/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/JGabrielGruber/ObsHard_bot/stargazers
+[stars-url]: https://github.com/JGabrielGruber/ObsHard_plat/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/JGabrielGruber/ObsHard_bot/issues
+[issues-url]: https://github.com/JGabrielGruber/ObsHard_plat/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/JGabrielGruber/ObsHard_bot/blob/master/LICENSE
+[license-url]: https://github.com/JGabrielGruber/ObsHard_plat/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jgabrielgruber
 [product-screenshot]: images/screenshot.png
