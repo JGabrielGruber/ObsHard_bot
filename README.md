@@ -22,16 +22,16 @@
   <h3 align="center">Plataforma do Observatório de Hardware</h3>
 
   <p align="center">
-    Plataform used to manage the <a href="https://github.com/JGabrielGruber/ObsHard_bot">ObsHard_bot</a>
+    Bot created to harvest computer hardware prices in Brazil
     <br />
-    <a href="https://github.com/JGabrielGruber/ObsHard_plat"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/JGabrielGruber/ObsHard_bot"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/JGabrielGruber/ObsHard_plat">View Demo</a>
+    <a href="https://github.com/JGabrielGruber/ObsHard_bot">View Demo</a>
     ·
-    <a href="https://github.com/JGabrielGruber/ObsHard_plat/issues">Report Bug</a>
+    <a href="https://github.com/JGabrielGruber/ObsHard_bot/issues">Report Bug</a>
     ·
-    <a href="https://github.com/JGabrielGruber/ObsHard_plat/issues">Request Feature</a>
+    <a href="https://github.com/JGabrielGruber/ObsHard_bot/issues">Request Feature</a>
   </p>
 </p>
 
@@ -125,7 +125,7 @@ Distributed under the AGPLv3 License. See the [License](LICENSE) for more inform
 
 José Gabriel Gruber - [@JGabrielGruber](https://twitter.com/JGabrielGruber) - jgabrielgruber@hotmail.com
 
-Project Link: [https://github.com/JGabrielGruber/ObsHard_plat](https://github.com/JGabrielGruber/ObsHard_plat)
+Project Link: [https://github.com/JGabrielGruber/ObsHard_bot](https://github.com/JGabrielGruber/ObsHard_bot)
 
 
 
@@ -153,15 +153,15 @@ Project Link: [https://github.com/JGabrielGruber/ObsHard_plat](https://github.co
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/JGabrielGruber/ObsHard_plat/graphs/contributors
+[contributors-url]: https://github.com/JGabrielGruber/ObsHard_bot/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/JGabrielGruber/ObsHard_plat/network/members
+[forks-url]: https://github.com/JGabrielGruber/ObsHard_bot/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/JGabrielGruber/ObsHard_plat/stargazers
+[stars-url]: https://github.com/JGabrielGruber/ObsHard_bot/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/JGabrielGruber/ObsHard_plat/issues
+[issues-url]: https://github.com/JGabrielGruber/ObsHard_bot/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/JGabrielGruber/ObsHard_plat/blob/master/LICENSE
+[license-url]: https://github.com/JGabrielGruber/ObsHard_bot/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jgabrielgruber
 [product-screenshot]: images/screenshot.png
