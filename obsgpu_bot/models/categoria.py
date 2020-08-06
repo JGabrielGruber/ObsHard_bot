@@ -1,7 +1,4 @@
-from models.modelo import Modelo
-
-
-class Variacao():
+class Categoria():
 	def __init__(self, nome: str, _id: str = None):
 		self._id = _id
 		self.nome = nome
