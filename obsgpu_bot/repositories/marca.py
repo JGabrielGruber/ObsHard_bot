@@ -3,35 +3,28 @@ from firebase_admin import db
 from models.marca import Marca
 from repositories.json import FirebaseJSON
 
-marcas: list = None
+marcas: dict = {}
+etag: str = None
 
 
-def get():
-	query = db.reference('/marcas').get()
-	marcas = []
-	if type(query) is dict:
-		for item in query:
-			marcas.append(Marca.fromJSON(query[item], item))
-	return marcas
+def change(event):
+	global marcas
+	global etag
+	if etag == None:
+		ret = db.reference('/marcas').get(etag=True)
+		etag = ret[1]
+		for key, item in ret[0].items():
+			marca = Marca.fromJSON(item, key)
+			marcas.update({ key: marca })
+	else:
+		ret = db.reference('/marcas').get_if_changed(etag)
+		if ret[0]:
+			etag = ret[2]
+			marcas.clear()
+			for key, item in ret[1].items():
+				marca = Marca.fromJSON(item, key)
+				marcas.update({ key: marca })
 
 
-def getById(id):
-	query = db.reference('/marcas/' + id).get()
-	if type(query) is dict:
-			return Marca.fromJSON(query, id)
-	return None
-
-
-def add(marca: Marca):
-	k = db.reference('/marcas').push(FirebaseJSON().encode(marca)).key
-	return Marca.fromJSON(db.reference('/marcas/' + k).get(), k)
-
-
-def upd(marca: Marca):
-	id = marca._id
-	db.reference('/marcas/' + id).set(FirebaseJSON().encode(marca))
-	return Marca.fromJSON(db.reference('/marcas/' + id).get(), id)
-
-
-def rmv(marca: Marca):
-	return db.reference('/marcas/' + marca._id).delete()
+def sync():
+	return db.reference('/marcas').listen(change)

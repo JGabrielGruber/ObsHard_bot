@@ -1,9 +1,9 @@
 class Loja:
 	def __init__(self,
 	             nome: str,
-	             tag: str,
-	             propriedade: str,
-	             atributo: str,
+	             tag: str = '',
+	             propriedade: str = '',
+	             atributo: str = '',
 	             _id: str = None):
 		self._id = _id
 		self.nome = nome
@@ -13,5 +13,6 @@ class Loja:
 
 	@classmethod
 	def fromJSON(cls, json, id=None):
-		return cls(json['nome'], json['tag'], json['propriedade'],
-		           json['atributo'], id if id else None)
+		return cls(json['nome'], json.get('tag', None),
+		           json.get('propriedade', None), json.get('atributo', None),
+		           id if id else None)

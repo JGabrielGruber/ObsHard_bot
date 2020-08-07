@@ -5,4 +5,4 @@ class Marca():
 
 	@classmethod
 	def fromJSON(cls, json, id=None):
-		return cls(json['nome'], id if id else None)
+		return cls(json['nome'], id or None)

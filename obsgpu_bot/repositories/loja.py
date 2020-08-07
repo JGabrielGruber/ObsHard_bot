@@ -3,34 +3,28 @@ from firebase_admin import db
 from models.loja import Loja
 from repositories.json import FirebaseJSON
 
-lojas: list = None
+lojas: dict = {}
+etag: str = None
 
 
-def get():
-	query = db.reference('/lojas').get()
-	lojas = []
-	if type(query) is dict:
-		for item in query:
-			lojas.append(Loja.fromJSON(query[item], item))
-	return lojas
-
-def getById(id):
-	query = db.reference('/lojas/' + id).get()
-	if type(query) is dict:
-		return Loja.fromJSON(query, id)
-	return None
-
-
-def add(loja: Loja):
-	k = db.reference('/lojas').push(FirebaseJSON().encode(loja)).key
-	return Loja.fromJSON(db.reference('/lojas/' + k).get(), k)
-
-
-def upd(loja: Loja):
-	id = loja._id
-	db.reference('/lojas/' + id).set(FirebaseJSON().encode(loja))
-	return Loja.fromJSON(db.reference('/lojas/' + id).get(), id)
+def change(event):
+	global lojas
+	global etag
+	if etag == None:
+		ret = db.reference('/lojas').get(etag=True)
+		etag = ret[1]
+		for key, item in ret[0].items():
+			loja = Arquitetura.fromJSON(item, key)
+			lojas.update({ key: loja })
+	else:
+		ret = db.reference('/lojas').get_if_changed(etag)
+		if ret[0]:
+			etag = ret[2]
+			lojas.clear()
+			for key, item in ret[1].items():
+				loja = Arquitetura.fromJSON(item, key)
+				lojas.update({ key: loja })
 
 
-def rmv(loja: Loja):
-	return db.reference('/lojas/' + loja._id).delete()
+def sync():
+	return db.reference('/lojas').listen(change)

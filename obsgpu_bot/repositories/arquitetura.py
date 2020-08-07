@@ -3,36 +3,28 @@ from firebase_admin import db
 from models.arquitetura import Arquitetura
 from repositories.json import FirebaseJSON
 
-arquiteturas: list = None
+arquiteturas: dict = {}
+etag: str = None
 
 
-def get():
-	query = db.reference('/arquiteturas').get()
-	arquiteturas = []
-	if type(query) is dict:
-		for item in query:
-			arquiteturas.append(Arquitetura.fromJSON(query[item], item))
-	return arquiteturas
+def change(event):
+	global arquiteturas
+	global etag
+	if etag == None:
+		ret = db.reference('/arquiteturas').get(etag=True)
+		etag = ret[1]
+		for key, item in ret[0].items():
+			arquitetura = Arquitetura.fromJSON(item, key)
+			arquiteturas.update({ key: arquitetura })
+	else:
+		ret = db.reference('/arquiteturas').get_if_changed(etag)
+		if ret[0]:
+			etag = ret[2]
+			arquiteturas.clear()
+			for key, item in ret[1].items():
+				arquitetura = Arquitetura.fromJSON(item, key)
+				arquiteturas.update({ key: arquitetura })
 
 
-def getById(id):
-	query = db.reference('/arquiteturas/' + id).get()
-	if type(query) is dict:
-		return Arquitetura.fromJSON(query, id)
-	return None
-
-
-def add(arquitetura: Arquitetura):
-	k = db.reference('/arquiteturas').push(
-	    FirebaseJSON().encode(arquitetura)).key
-	return Arquitetura.fromJSON(db.reference('/arquiteturas/' + k).get(), k)
-
-
-def upd(arquitetura: Arquitetura):
-	id = arquitetura._id
-	db.reference('/arquiteturas/' + id).set(FirebaseJSON().encode(arquitetura))
-	return Arquitetura.fromJSON(db.reference('/arquiteturas/' + id).get(), id)
-
-
-def rmv(arquitetura: Arquitetura):
-	return db.reference('/arquiteturas/' + arquitetura._id).delete()
+def sync():
+	return db.reference('/arquiteturas').listen(change)
