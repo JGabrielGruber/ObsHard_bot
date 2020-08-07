@@ -10,9 +10,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![AGPLv3 License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -22,10 +19,10 @@
     <img src="images/logo.png" alt="Logo" height="80">
   </a>
 
-  <h3 align="center">Bot do Observatório de Hardware</h3>
+  <h3 align="center">Plataforma do Observatório de Hardware</h3>
 
   <p align="center">
-    A bot for harvesting prices in e-commerces
+    Bot created to harvest computer hardware prices in Brazil
     <br />
     <a href="https://github.com/JGabrielGruber/ObsHard_bot"><strong>Explore the docs »</strong></a>
     <br />
@@ -66,7 +63,7 @@
 
 ### Built With
 <!-- This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.-->
-* [Python](https://python.org)
+* [ReactJS](https://reactjs.org)
 
 
 
@@ -78,15 +75,11 @@
 ### Requisites
 
 Those are some requisites you need to run this project:
-* Python 3
+* Node
 
 ### Prerequisites
 
-Install the packages that the project needs to run correctly:
-* batman-adv
-```sh
-pip install -r requirements.txt
-```
+**_TO-DO_**
 
 ### Installation
 
@@ -98,9 +91,6 @@ pip install -r requirements.txt
 ## Usage
 
 **_TO-DO_**
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 
 
 <!-- ROADMAP -->
