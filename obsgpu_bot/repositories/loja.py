@@ -14,7 +14,7 @@ def change(event):
 		ret = db.reference('/lojas').get(etag=True)
 		etag = ret[1]
 		for key, item in ret[0].items():
-			loja = Arquitetura.fromJSON(item, key)
+			loja = Loja.fromJSON(item, key)
 			lojas.update({ key: loja })
 	else:
 		ret = db.reference('/lojas').get_if_changed(etag)
@@ -22,7 +22,7 @@ def change(event):
 			etag = ret[2]
 			lojas.clear()
 			for key, item in ret[1].items():
-				loja = Arquitetura.fromJSON(item, key)
+				loja = Loja.fromJSON(item, key)
 				lojas.update({ key: loja })
 
 
