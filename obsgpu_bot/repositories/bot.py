@@ -19,7 +19,6 @@ def change(event):
 		if ret[0]:
 			etag = ret[2]
 			bot.updateFromJSON(ret[1])
-	print(bot.ativo)
 
 
 def sync():
