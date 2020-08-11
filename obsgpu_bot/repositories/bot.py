@@ -34,4 +34,5 @@ def addLog(log):
 	if len(data.log) > 100:
 		data.log = []
 	data.log.append(log)
-	update(data)
+	if etag != None:
+		update(data)
