@@ -1,17 +1,19 @@
 import tweepy
 import json
 import firebase_admin
+import os.path
 
 from firebase_admin import db, credentials
 
-__CONFPATH__ = "config.json"
+__CONFPATH__ = "../config.json"
+__PATH__ = os.path.abspath(os.path.dirname(sys.argv[0]))
 tw_api: tweepy.API = None
 fb_app: firebase_admin.App = None
 
 
 def loadConfigs():
 	try:
-		with open(__CONFPATH__) as f:
+		with open(__PATH__ + __CONFPATH__) as f:
 			return json.load(f)
 	except Exception:
 		return None
