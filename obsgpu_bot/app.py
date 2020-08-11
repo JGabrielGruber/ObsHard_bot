@@ -24,22 +24,22 @@ async def waitUntil(repo):
 
 
 async def run():
-	print('Waiting for Repos...')
+	loggin.info('Waiting for Repos...')
 	await asyncio.create_task(waitUntil(produtoRepo))
 	await asyncio.create_task(waitUntil(lojaRepo))
 	await asyncio.create_task(waitUntil(botRepo))
-	print('Done')
+	loggin.info('Done')
 	semaphore = asyncio.Semaphore(
 	    10)  # Max limit 1000, limited to 10 to avoid spamming
 
 	while True:
 		if botRepo.bot.ativo:
-			print('Requesting prices...')
+			loggin.info('Requesting prices...')
 			async with ClientSession() as session:
 				await asyncio.gather(
 				    *(req.getPreco(produto, key, semaphore, session)
 				      for key, produto in produtoRepo.produtos.items()))
-			print('Done')
+			loggin.info('Done')
 			await asyncio.sleep((float(botRepo.bot.intervalo) or 1) * 60)
 		await asyncio.sleep(1)
 
@@ -58,19 +58,17 @@ botLog.setLevel(logging.INFO)
 botLog.callback = botRepo.addLog
 logging.getLogger('').addHandler(botLog)
 
-print = logging.info
-
-print('Starting the bot...')
+logging.info('Starting the bot...')
 
 if main.fb_app is None:
-	print('Configuring Firebase...')
+	loggin.info('Configuring Firebase...')
 	main.defineConfigs()
-	print('Done')
+	loggin.info('Done')
 
-print('Starting Repos Sync...')
+loggin.info('Starting Repos Sync...')
 botRepo.sync()
 lojaRepo.sync()
 produtoRepo.sync()
-print('Done')
+loggin.info('Done')
 
 asyncio.run(run())

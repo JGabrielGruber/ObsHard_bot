@@ -4,6 +4,7 @@ import locale
 import datetime
 import random
 import sys, os
+import logging
 
 from bs4 import BeautifulSoup
 from models.loja import Loja
@@ -15,7 +16,7 @@ from repositories import loja as lojaRepo
 async def fetch(url, session):
 	async with session.get(url) as response:
 		date = response.headers.get("DATE")
-		print("{}:{} with status {}".format(date, response.url, response.status))
+		logging.info("{} - {}".format(response.status, response.url))
 		return await response.read()
 
 
@@ -24,14 +25,16 @@ async def bound_fetch(sem, url, session):
 		return await fetch(url, session)
 
 
-async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore, session, callback):
-
+async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
+                     session, callback):
 	if produto and loja:
 		locale.setlocale(locale.LC_NUMERIC, "pt_BR.UTF-8")
 		price = {}
 		val = 0.0
 		status = 'ok'
 		try:
+			if loja.nome == 'Pichau':
+				asyncio.sleep(random.randrange(1, 9))
 			text = await bound_fetch(semaphore, produto.link, session)
 			soup = BeautifulSoup(text, "html.parser")
 			price = soup.find(loja.tag,
@@ -53,8 +56,8 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore, session,
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-			print(e)
-			print(exc_type, fname, exc_tb.tb_lineno)
+			logging.info(e)
+			logging.error(exc_type, fname, exc_tb.tb_lineno)
 			status = 'err'
 		finally:
 			produto.status = status
@@ -78,4 +81,5 @@ def getProdutos():
 async def getPreco(produto: Produto, key: str, semaphore, session):
 	loja = lojaRepo.lojas.get(produto.loja, None)
 	asyncio.sleep(random.randrange(1, 9) * 0.1)
-	data = await fetchPreco(produto, key, loja, semaphore, session, produtoRepo.update)
+	data = await fetchPreco(produto, key, loja, semaphore, session,
+	                        produtoRepo.update)
