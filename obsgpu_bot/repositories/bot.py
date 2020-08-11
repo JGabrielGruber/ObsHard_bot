@@ -27,3 +27,11 @@ def sync():
 
 def update(data):
 	db.reference().child('bot').set(FirebaseJSON().encode(data))
+
+
+def addLog(log):
+	data = bot
+	if len(data.log) > 100:
+		data.log = []
+	data.log.append(log)
+	update(data)

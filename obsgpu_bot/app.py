@@ -6,12 +6,12 @@ import logging
 
 from aiohttp import ClientSession
 
-import repositories.bot as botRepo
-import repositories.loja as lojaRepo
-import repositories.produto as produtoRepo
-
+from repositories import bot as botRepo
+from repositories import loja as lojaRepo
+from repositories import produto as produtoRepo
 from price_request import req
 from models.produto import Produto
+from lib.callbackHandler import CallbackHandler
 
 
 async def waitUntil(repo):
@@ -49,10 +49,14 @@ logging.basicConfig(
     filemode='a',
     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
     datefmt='%H:%M:%S',
-    level=logging.DEBUG)
+    level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
+botLog = CallbackHandler()
+botLog.setLevel(logging.INFO)
+botLog.callback = botRepo.addLog
+logging.getLogger('').addHandler(botLog)
 
 print = logging.info
 
