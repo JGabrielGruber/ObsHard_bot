@@ -77,5 +77,5 @@ def getProdutos():
 
 async def getPreco(produto: Produto, key: str, semaphore, session):
 	loja = lojaRepo.lojas.get(produto.loja, None)
-	asyncio.sleep(random.randrange(0.1, 0.9))
+	asyncio.sleep(random.randrange(1, 9) * 0.1)
 	data = await fetchPreco(produto, key, loja, semaphore, session, produtoRepo.update)
