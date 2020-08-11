@@ -40,7 +40,7 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore, session,
 				if loja.nome == 'Kabum':
 					val = float(price["content"])
 				elif loja.nome == 'Pichau':
-					val = locale.atof(price.contents[1].string.split('a ')[1])
+					val = locale.atof(price.contents[1].string.split('R$')[1])
 				elif loja.nome == 'TerabyteShop':
 					val = locale.atof(price.contents[0])
 		except ValueError:
