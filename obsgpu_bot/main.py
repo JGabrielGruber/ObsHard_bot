@@ -44,11 +44,3 @@ def defineConfigs():
 	else:
 		raise Exception(
 		    "Please, create the config.json file as the config.json.example!")
-
-
-def main():
-	defineConfigs()
-
-	from repositories import repo
-	from twitter_bot import bot
-	from price_request import req
