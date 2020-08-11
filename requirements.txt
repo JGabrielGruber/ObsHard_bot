@@ -1,4 +1,6 @@
+aiohttp==3.6.2
 astroid==2.3.3
+async-timeout==3.0.1
 atomicwrites==1.3.0
 attrs==19.3.0
 beautifulsoup4==4.8.2
@@ -33,6 +35,7 @@ lazy-object-proxy==1.4.3
 mccabe==0.6.1
 more-itertools==8.2.0
 msgpack==1.0.0
+multidict==4.7.6
 Naked==0.1.31
 oauth2client==4.1.3
 oauthlib==3.1.0
@@ -64,4 +67,5 @@ urllib3==1.25.8
 wcwidth==0.1.8
 wrapt==1.11.2
 yapf==0.29.0
+yarl==1.5.1
 zipp==3.1.0
