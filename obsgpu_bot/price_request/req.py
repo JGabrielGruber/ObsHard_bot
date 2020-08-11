@@ -65,7 +65,7 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore, session,
 					produto.precos = []
 				produto.precos.append(
 				    [val, datetime.datetime.now().timestamp()])
-			return callback(produto, key)
+				return callback(produto, key)
 
 
 def getProdutos():
