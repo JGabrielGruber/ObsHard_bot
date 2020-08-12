@@ -52,10 +52,7 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 				else:
 					status = 'no'
 		except ValueError:
-			try:
-				val = locale.atof(price["content"])
-			except KeyError:
-				val = locale.atof(price.contents[0].string.split(" ", 1)[1])
+			status = 'ba'
 		except ConnectionError:
 			status = 'of'
 		except Exception as e:
@@ -65,14 +62,17 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 			logging.error(exc_type, fname, exc_tb.tb_lineno)
 			status = 'er'
 		finally:
-			produto.status = status
-			if val > 0.0 and (
+			if val > 0.0 && (
 			    not produto.precos
-			    or produto.precos[len(produto.precos) - 1][0] != val):
+			    || produto.precos[len(produto.precos) - 1][0] != val):
 				if not produto.precos:
 					produto.precos = []
+				produto.status = status
 				produto.precos.append(
 				    [val, datetime.datetime.now().timestamp()])
+				return callback(produto, key)
+			elif produto.status != status:
+				produto.status = status
 				return callback(produto, key)
 
 
