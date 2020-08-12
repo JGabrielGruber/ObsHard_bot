@@ -10,7 +10,7 @@ from repositories import notification as notificationRepo
 
 async def sendNotification(produto: Produto):
 	modelo: Modelo = modeloRepo.modelos.get(produto.modelo, '')
-	marca: Marca = marcaRepo.marcas.get(modelo.marca or '', '')
+	marca: Marca = marcaRepo.marcas.get(modelo.marca, '') if modelo else ''
 	title = f'{marca} {modelo}'
 	content = f'{produto.precos[-2:][0:][0:]} -> {produto.precos[-1:][0:]}'
 	timestamp = produto.precos[-1:][1:]
