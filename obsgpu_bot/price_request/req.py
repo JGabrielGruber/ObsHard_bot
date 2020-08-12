@@ -40,13 +40,13 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 			price = soup.find(loja.tag,
 			                  attrs={loja.propriedade: loja.atributo})
 			if price != None:
-				if loja.nome == 'Kabum' && soup.find('div',
+				if loja.nome == 'Kabum' and soup.find('div',
 			                  attrs={'class': 'botao-comprar'}) != None:
 					val = float(price["content"])
-				elif loja.nome == 'Pichau' && soup.find('div',
+				elif loja.nome == 'Pichau' and soup.find('div',
 			                  attrs={'class': 'stock available'}) != None:
 					val = locale.atof(price.contents[1].string.split('R$')[1])
-				elif loja.nome == 'TerabyteShop' && soup.find('div',
+				elif loja.nome == 'TerabyteShop' and soup.find('div',
 			                  attrs={'id': 'indisponivel'}) == None:
 					val = locale.atof(price.contents[0])
 				else:
@@ -62,9 +62,9 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 			logging.error(exc_type, fname, exc_tb.tb_lineno)
 			status = 'er'
 		finally:
-			if val > 0.0 && (
+			if val > 0.0 and (
 			    not produto.precos
-			    || produto.precos[len(produto.precos) - 1][0] != val):
+			    or produto.precos[len(produto.precos) - 1][0] != val):
 				if not produto.precos:
 					produto.precos = []
 				produto.status = status
