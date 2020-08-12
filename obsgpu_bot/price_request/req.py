@@ -11,6 +11,7 @@ from models.loja import Loja
 from models.produto import Produto
 from repositories import produto as produtoRepo
 from repositories import loja as lojaRepo
+from price_report import push
 
 
 async def fetch(url, session):
@@ -34,7 +35,7 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 		status = 'ok'
 		try:
 			if loja.nome == 'Pichau':
-				asyncio.sleep(random.randrange(1, 9))
+				asyncio.sleep(random.randrange(6, 30))
 			text = await bound_fetch(semaphore, produto.link, session)
 			soup = BeautifulSoup(text, "html.parser")
 			price = soup.find(loja.tag,
@@ -64,12 +65,13 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 		finally:
 			if val > 0.0 and (
 			    not produto.precos
-			    or produto.precos[len(produto.precos) - 1][0] != val):
+			    or produto.precos[-1:][0] != val):
 				if not produto.precos:
 					produto.precos = []
 				produto.status = status
 				produto.precos.append(
 				    [val, datetime.datetime.now().timestamp()])
+				await push.sendNotification(produto)
 				return callback(produto, key)
 			elif produto.status != status:
 				produto.status = status
