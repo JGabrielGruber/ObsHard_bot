@@ -26,9 +26,9 @@ def sync():
 
 
 def addNotification(notification):
-	data = notifications
+	data: list = notifications
 	if len(data) > 100:
-		data = []
+		data.pop(0)
 	data.append(notification)
 	if etag != None:
 		update(data)
