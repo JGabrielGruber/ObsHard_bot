@@ -35,23 +35,28 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 		status = 'ok'
 		try:
 			if loja.nome == 'Pichau':
-				asyncio.sleep(random.randrange(20, 60))
+				await asyncio.sleep(random.randrange(20, 60))
 			text = await bound_fetch(semaphore, produto.link, session)
 			soup = BeautifulSoup(text, "html.parser")
 			price = soup.find(loja.tag,
 			                  attrs={loja.propriedade: loja.atributo})
 			if price != None:
-				if loja.nome == 'Kabum' and soup.find('div',
-			                  attrs={'class': 'botao-comprar'}) != None:
-					val = float(price["content"])
-				elif loja.nome == 'Pichau' and soup.find('div',
-			                  attrs={'class': 'stock available'}) != None:
+				if loja.nome == 'Kabum' and soup.find(
+				    'div', attrs={'class': 'botao-comprar'}) != None:
+					#val = float(price["content"])
+					val = locale.atof(
+					    price.contents[5].contents[1].contents[1].contents[7].
+					    contents[1].contents[1].contents[1].contents[0].string.split('R$')[1])
+				elif loja.nome == 'Pichau' and soup.find(
+				    'div', attrs={'class': 'stock available'}) != None:
 					val = locale.atof(price.contents[1].string.split('R$')[1])
-				elif loja.nome == 'TerabyteShop' and soup.find('div',
-			                  attrs={'id': 'indisponivel'}) == None:
+				elif loja.nome == 'TerabyteShop' and soup.find(
+				    'div', attrs={'id': 'indisponivel'}) == None:
 					val = locale.atof(price.contents[0])
 				else:
 					status = 'no'
+			else:
+				status = 'er'
 		except ValueError:
 			status = 'ba'
 		except ConnectionError:
@@ -63,9 +68,8 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 			logging.error(exc_type, fname, exc_tb.tb_lineno)
 			status = 'er'
 		finally:
-			if val > 0.0 and (
-			    not produto.precos
-			    or produto.precos[-1:][0] != val):
+			if val > 0.0 and (not produto.precos
+			                  or produto.precos[-1:][0:] != val):
 				if not produto.precos:
 					produto.precos = []
 				produto.status = status
@@ -87,6 +91,6 @@ def getProdutos():
 
 async def getPreco(produto: Produto, key: str, semaphore, session):
 	loja = lojaRepo.lojas.get(produto.loja, None)
-	asyncio.sleep(random.randrange(1, 9) * 0.1)
+	await asyncio.sleep(random.randrange(1, 9) * 0.1)
 	data = await fetchPreco(produto, key, loja, semaphore, session,
 	                        produtoRepo.update)
