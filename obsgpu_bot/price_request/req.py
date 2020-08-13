@@ -58,8 +58,15 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 			else:
 				status = 'er'
 		except IndexError:
-			price = soup.find('span', attrs={'class': 'preco_desconto_avista-cm'})
-			val = locale.atof(price.contents[0].string.split('R$')[1])
+			try:
+				price = soup.find('span', attrs={'class': 'preco_desconto_avista-cm'})
+				val = locale.atof(price.contents[0].string.split('R$')[1])
+			except Exception as e:
+				exc_type, exc_obj, exc_tb = sys.exc_info()
+				fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+				logging.error(e)
+				logging.error(exc_type, fname, exc_tb.tb_lineno)
+				status = 'er'
 		except ValueError:
 			status = 'ba'
 		except ConnectionError:
