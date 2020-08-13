@@ -35,7 +35,7 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 		status = 'ok'
 		try:
 			if loja.nome == 'Pichau':
-				asyncio.sleep(random.randrange(6, 30))
+				asyncio.sleep(random.randrange(20, 60))
 			text = await bound_fetch(semaphore, produto.link, session)
 			soup = BeautifulSoup(text, "html.parser")
 			price = soup.find(loja.tag,
