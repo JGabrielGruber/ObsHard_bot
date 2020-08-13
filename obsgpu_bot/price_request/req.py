@@ -18,7 +18,11 @@ async def fetch(url, session):
 	async with session.get(url) as response:
 		date = response.headers.get("DATE")
 		logging.info("{} - {}".format(response.status, response.url))
-		return await response.read()
+		if (response.status == 429):
+			await asyncio.sleep(random.randrange(120, 170))
+			return await fetch(url, session)
+		else:
+			return await response.read()
 
 
 async def bound_fetch(sem, url, session):
