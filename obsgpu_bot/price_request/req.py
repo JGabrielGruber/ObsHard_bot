@@ -57,6 +57,9 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 					status = 'no'
 			else:
 				status = 'er'
+		except IndexError:
+			price = soup.find('span', attrs={'class': 'preco_desconto_avista-cm'})
+			val = locale.atof(price.contents[0].string.split('R$')[1])
 		except ValueError:
 			status = 'ba'
 		except ConnectionError:
