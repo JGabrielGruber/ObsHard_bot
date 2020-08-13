@@ -75,7 +75,8 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 				produto.status = status
 				produto.precos.append(
 				    [val, datetime.datetime.now().timestamp()])
-				await push.sendNotification(produto)
+				if produto.precos > 1:
+					await push.sendNotification(produto)
 				return callback(produto, key)
 			elif produto.status != status:
 				produto.status = status
