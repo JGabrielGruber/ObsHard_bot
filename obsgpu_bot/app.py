@@ -52,9 +52,9 @@ logging.basicConfig(
     filemode='a',
     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
     datefmt='%H:%M:%S',
-    level=logging.ERROR)
+    level=logging.DEBUG)
 console = logging.StreamHandler()
-console.setLevel(logging.ERROR)
+console.setLevel(logging.DEBUG)
 logging.getLogger('').addHandler(console)
 botLog = CallbackHandler()
 botLog.setLevel(logging.INFO)
