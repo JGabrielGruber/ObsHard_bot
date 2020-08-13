@@ -64,7 +64,7 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-			logging.info(e)
+			logging.error(e)
 			logging.error(exc_type, fname, exc_tb.tb_lineno)
 			status = 'er'
 		finally:
