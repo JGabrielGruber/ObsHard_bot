@@ -8,6 +8,9 @@ from aiohttp import ClientSession
 
 from repositories import bot as botRepo
 from repositories import loja as lojaRepo
+from repositories import marca as marcaRepo
+from repositories import modelo as modeloRepo
+from repositories import notification as notificationRepo
 from repositories import produto as produtoRepo
 from price_request import req
 from models.produto import Produto
@@ -68,6 +71,9 @@ if main.fb_app is None:
 logging.info('Starting Repos Sync...')
 botRepo.sync()
 lojaRepo.sync()
+marcaRepo.sync()
+modeloRepo.sync()
+notificationRepo.sync()
 produtoRepo.sync()
 logging.info('Done')
 

@@ -1,5 +1,5 @@
 class Notification():
-	def __init__(self, title: str, content: str, timestamp: int, key: str):
+	def __init__(self, title: str, content: str, timestamp: float, key: str):
 		self.title = title
 		self.content = content
 		self.timestamp = timestamp
@@ -8,4 +8,4 @@ class Notification():
 	@classmethod
 	def fromJSON(cls, json):
 		return cls(json['title'], json['content'], json['timestamp'],
-		           json['key'])
+		           json.get('key', ''))
