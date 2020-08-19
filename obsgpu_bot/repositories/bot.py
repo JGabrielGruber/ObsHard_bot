@@ -22,7 +22,7 @@ def change(event):
 
 
 def sync():
-	return db.reference().child('bot').listen(change)
+	return change()
 
 
 def update(data):

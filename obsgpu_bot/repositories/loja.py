@@ -27,4 +27,4 @@ def change(event):
 
 
 def sync():
-	return db.reference('/lojas').listen(change)
+	return change()

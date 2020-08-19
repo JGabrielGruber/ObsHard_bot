@@ -27,7 +27,7 @@ def change(event):
 
 
 def sync():
-	return db.reference('/produtos').listen(change)
+	return change()
 
 
 def update(data, id):

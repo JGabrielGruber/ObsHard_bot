@@ -17,6 +17,12 @@ from models.produto import Produto
 from lib.callbackHandler import CallbackHandler
 
 
+async def sync(repo):
+	while True:
+		repo.change(None)
+		await asyncio.sleep(15)
+
+
 async def waitUntil(repo):
 	c = True
 	while c:
@@ -24,6 +30,18 @@ async def waitUntil(repo):
 			c = False
 			return
 		await asyncio.sleep(0.5)
+
+
+async def start():
+	await asyncio.gather(
+		sync(botRepo),
+		lojaRepo.change(None),
+		marcaRepo.change(None),
+		modeloRepo.change(None),
+		notificationRepo.change(None),
+		produtoRepo.change(None),
+		run()
+	)
 
 
 async def run():
@@ -58,7 +76,7 @@ console.setLevel(logging.DEBUG)
 logging.getLogger('').addHandler(console)
 botLog = CallbackHandler()
 botLog.setLevel(logging.INFO)
-botLog.callback = botRepo.addLog
+#botLog.callback = botRepo.addLog
 logging.getLogger('').addHandler(botLog)
 
 logging.info('Starting the bot...')
@@ -69,12 +87,4 @@ if main.fb_app is None:
 	logging.info('Done')
 
 logging.info('Starting Repos Sync...')
-botRepo.sync()
-lojaRepo.sync()
-marcaRepo.sync()
-modeloRepo.sync()
-notificationRepo.sync()
-produtoRepo.sync()
-logging.info('Done')
-
-asyncio.run(run())
+asyncio.run(start())

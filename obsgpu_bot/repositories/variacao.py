@@ -27,4 +27,4 @@ def change(event):
 
 
 def sync():
-	return db.reference('/variacoes').listen(change)
+	return change()

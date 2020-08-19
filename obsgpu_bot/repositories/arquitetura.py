@@ -27,4 +27,4 @@ def change(event):
 
 
 def sync():
-	return db.reference('/arquiteturas').listen(change)
+	return change()

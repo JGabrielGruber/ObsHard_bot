@@ -31,7 +31,7 @@ def change(event):
 
 
 def sync():
-	return db.reference('/notificacoes').listen(change)
+	return change()
 
 
 def addNotification(notification):

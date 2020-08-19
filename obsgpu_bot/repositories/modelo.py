@@ -27,4 +27,4 @@ def change(event):
 
 
 def sync():
-	return db.reference('/modelos').listen(change)
+	return change()
