@@ -33,13 +33,13 @@ async def waitUntil(repo):
 
 
 async def start():
+	lojaRepo.change(None),
+	marcaRepo.change(None),
+	modeloRepo.change(None),
+	notificationRepo.change(None),
+	produtoRepo.change(None),
 	await asyncio.gather(
 		sync(botRepo),
-		lojaRepo.change(None),
-		marcaRepo.change(None),
-		modeloRepo.change(None),
-		notificationRepo.change(None),
-		produtoRepo.change(None),
 		run()
 	)
 
@@ -56,6 +56,7 @@ async def run():
 	while True:
 		if botRepo.bot.ativo:
 			logging.info('Requesting prices...')
+			produtoRepo.change(None),
 			async with ClientSession() as session:
 				await asyncio.gather(
 				    *(req.getPreco(produto, key, semaphore, session)
