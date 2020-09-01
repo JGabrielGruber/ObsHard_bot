@@ -3,6 +3,8 @@ from firebase_admin import db
 from models.notification import Notification
 from repositories.json import FirebaseJSON
 
+from time import sleep
+
 notifications: list = []
 etag: str = None
 
@@ -35,5 +37,9 @@ def sync():
 
 
 def addNotification(notification):
-	if etag != None:
-		db.reference('/notificacoes').push(FirebaseJSON().encode(notification))
+	try:
+		if etag != None:
+			db.reference('/notificacoes').push(FirebaseJSON().encode(notification))
+	except Exception:
+		sleep(1)
+		addNotification(notification)

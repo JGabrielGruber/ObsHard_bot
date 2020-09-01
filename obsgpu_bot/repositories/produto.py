@@ -3,6 +3,8 @@ from firebase_admin import db
 from models.produto import Produto
 from repositories.json import FirebaseJSON
 
+from time import sleep
+
 produtos: dict = {}
 etag: str = None
 
@@ -31,4 +33,8 @@ def sync():
 
 
 def update(data, id):
-	db.reference('/produtos').child(id).set(FirebaseJSON().encode(data))
+	try:
+		db.reference('/produtos').child(id).set(FirebaseJSON().encode(data))
+	except Exception:
+		sleep(1)
+		update(data, id)

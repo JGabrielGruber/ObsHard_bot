@@ -56,7 +56,11 @@ async def run():
 	while True:
 		if botRepo.bot.ativo:
 			logging.info('Requesting prices...')
-			produtoRepo.change(None),
+			try:
+				produtoRepo.change(None)
+			except Exception:
+				await asyncio.sleep(1)
+				continue
 			async with ClientSession() as session:
 				await asyncio.gather(
 				    *(req.getPreco(produto, key, semaphore, session)

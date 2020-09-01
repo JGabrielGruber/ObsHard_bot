@@ -1,4 +1,5 @@
 from firebase_admin import db
+from time import sleep
 
 from models.bot import Bot
 from repositories.json import FirebaseJSON
@@ -26,7 +27,11 @@ def sync():
 
 
 def update(data):
-	db.reference().child('bot').set(FirebaseJSON().encode(data))
+	try:
+		db.reference().child('bot').set(FirebaseJSON().encode(data))
+	except Exception:
+		sleep(1)
+		update(data)
 
 
 def addLog(log):
