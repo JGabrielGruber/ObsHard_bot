@@ -32,7 +32,7 @@ async def bound_fetch(sem, url, session):
 
 async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
                      session, callback):
-	if produto and loja:
+	if produto and loja and loja.buscar:
 		locale.setlocale(locale.LC_NUMERIC, "pt_BR.UTF-8")
 		price = None
 		val = 0.0
