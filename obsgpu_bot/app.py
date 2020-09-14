@@ -75,9 +75,9 @@ logging.basicConfig(
     filemode='a',
     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
     datefmt='%H:%M:%S',
-    level=logging.DEBUG)
+    level=logging.INFO)
 console = logging.StreamHandler()
-console.setLevel(logging.DEBUG)
+console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
 botLog = CallbackHandler()
 botLog.setLevel(logging.INFO)
