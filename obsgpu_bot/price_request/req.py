@@ -15,7 +15,7 @@ from price_report import push
 
 
 async def fetch(url, session):
-	async with session.get(url) as response:
+	async with session.get(url, headers={'UserAgent': 'ObservatorioHard'}) as response:
 		date = response.headers.get("DATE")
 		logging.info("{} - {}".format(response.status, response.url))
 		if (response.status == 429):
