@@ -22,7 +22,7 @@ async def fetch(url, session):
 			await asyncio.sleep(random.randrange(120, 170))
 			return await fetch(url, session)
 		if (response.status == 404):
-			return await (response.read(), 404)
+			return (await response.read(), 404)
 		else:
 			return await response.read()
 
