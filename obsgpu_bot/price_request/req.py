@@ -21,6 +21,8 @@ async def fetch(url, session):
 		if (response.status == 429):
 			await asyncio.sleep(random.randrange(120, 170))
 			return await fetch(url, session)
+		if (response.status == 404):
+			return await (response.read(), 404)
 		else:
 			return await response.read()
 
@@ -40,11 +42,14 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 		try:
 			if loja.nome == 'Pichau':
 				await asyncio.sleep(random.randrange(20, 60))
-			text = await bound_fetch(semaphore, produto.link, session)
+			(text, code) = await bound_fetch(semaphore, produto.link, session)
 			soup = BeautifulSoup(text, "html.parser")
 			price = soup.find(loja.tag,
 			                  attrs={loja.propriedade: loja.atributo})
-			if price != None:
+			if code != None:
+				status = 'er'
+				logging.error("Not found - {} - {}".format(produto.link, produto._id))
+			elif price != None:
 				if loja.nome == 'Kabum' and soup.find(
 				    'div', attrs={'class': 'botao-comprar'}) != None:
 					#val = float(price["content"])
@@ -64,9 +69,13 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 		except IndexError:
 			try:
 				price = soup.find('span', attrs={'class': 'preco_desconto_avista-cm'})
-				val = locale.atof(price.contents[0].string.split('R$')[1])
+				if price == None:
+					price = soup.find('span', attrs={'class': 'preco_desconto'}).contents[1].contents[1].contents[1]
+					val = locale.atof(price.string.split('R$')[1])
+				else:
+					val = locale.atof(price.contents[0].string.split('R$')[1])
 			except AttributeError as e:
-				logging.error("No price - {}".format(produto.link))
+				logging.error("No price - {} - {}".format(produto.link, e))
 				status = 'er'
 			except Exception as e:
 				exc_type, exc_obj, exc_tb = sys.exc_info()
