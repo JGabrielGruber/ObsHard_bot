@@ -80,8 +80,8 @@ console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
 botLog = CallbackHandler()
-botLog.setLevel(logging.INFO)
-#botLog.callback = botRepo.addLog
+botLog.setLevel(logging.ERROR)
+botLog.callback = botRepo.addLog
 logging.getLogger('').addHandler(botLog)
 
 logging.info('Starting the bot...')
