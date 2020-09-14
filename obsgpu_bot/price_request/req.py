@@ -66,7 +66,7 @@ async def fetchPreco(produto: Produto, key: str, loja: Loja, semaphore,
 				price = soup.find('span', attrs={'class': 'preco_desconto_avista-cm'})
 				val = locale.atof(price.contents[0].string.split('R$')[1])
 			except AttributeError as e:
-				logging.error("AttrError - {}".format(price))
+				logging.error("No price - {}".format(produto.link))
 				status = 'er'
 			except Exception as e:
 				exc_type, exc_obj, exc_tb = sys.exc_info()
